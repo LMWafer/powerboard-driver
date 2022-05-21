@@ -1,6 +1,10 @@
 #include "i2c/i2c.h"
+#include "commands.h"
+
 #include <string.h>
 #include <iostream>
+#include <unistd.h>
+
 using namespace std;
 
 int main()
@@ -18,24 +22,87 @@ int main()
 	I2CDevice device;
 	memset(&device, 0, sizeof(device));
 
-	device.bus = bus;		/* Bus 0 */
-	device.addr = 0x70;		/* Slave address is 0x50, 7-bit */
-	device.page_bytes = 3; /* Device are capable of 16 bytes per page */
+	device.bus = bus;
+	device.addr = 0x70;
+	device.page_bytes = 3;
 	device.tenbit = 0;
 	device.iaddr_bytes = 0;
 	device.flags = 0;
 
-	// unsigned char buffer[256];
-	// ssize_t size = sizeof(buffer);
-	// memset(buffer, 0, sizeof(buffer));
+	unsigned int micro(1000000);
 
-	unsigned char buffer[3] = {0x02, 0xFF, 0x01};
-	ssize_t size = sizeof(buffer);
+	ssize_t size = 3 * sizeof(unsigned char);
+	unsigned char buffer[3] = {STOP_ALL, 0, 0};
 
+	// buffer[0] = SET_POWER_ALL;
+	// buffer[1] = FULL_THROTTLE;
+	// buffer[2] = FORWARD;
 	ssize_t size_sent = i2c_ioctl_write(&device, 0, buffer, size);
-	if (size_sent != size) {
+	if (size_sent != size)
 		cout << "An error occured during data sending..." << endl;
-	}
+
+	usleep(3*micro);
+
+	buffer[0] = STOP_M1;
+	buffer[1] = 0;
+	buffer[2] = 0;
+	size_sent = i2c_ioctl_write(&device, 0, buffer, size);
+	if (size_sent != size)
+		cout << "An error occured during data sending..." << endl;
+
+	usleep(3*micro);
+
+	buffer[0] = STOP_M2;
+	buffer[1] = 0;
+	buffer[2] = 0;
+	size_sent = i2c_ioctl_write(&device, 0, buffer, size);
+	if (size_sent != size)
+		cout << "An error occured during data sending..." << endl;
+
+	usleep(3*micro);
+	
+	buffer[0] = SET_POWER_M1;
+	buffer[1] = HALF_THROTTLE;
+	buffer[2] = FORWARD;
+	size_sent = i2c_ioctl_write(&device, 0, buffer, size);
+	if (size_sent != size)
+		cout << "An error occured during data sending..." << endl;
+
+	usleep(3*micro);
+
+	buffer[0] = BRAKE_M2;
+	buffer[1] = 0;
+	buffer[2] = 0;
+	size_sent = i2c_ioctl_write(&device, 0, buffer, size);
+	if (size_sent != size)
+		cout << "An error occured during data sending..." << endl;
+
+	usleep(3*micro);
+
+	buffer[0] = REVERSE_POWER_M1;
+	buffer[1] = 0;
+	buffer[2] = 0;
+	size_sent = i2c_ioctl_write(&device, 0, buffer, size);
+	if (size_sent != size)
+		cout << "An error occured during data sending..." << endl;
+
+	usleep(3*micro);
+
+	buffer[0] = STOP_ALL;
+	buffer[1] = 0;
+	buffer[2] = 0;
+	size_sent = i2c_ioctl_write(&device, 0, buffer, size);
+	if (size_sent != size)
+		cout << "An error occured during data sending..." << endl;
+
+	// strcpy(&buffer, {SET_POWER_ALL, FULL_THROTTLE, BACKWARD});
+	// size = sizeof(buffer);
+
+	// size_sent = i2c_ioctl_write(&device, 0, buffer, size);
+	// if (size_sent != size)
+	// {
+	// 	cout << "An error occured during data sending..." << endl;
+	// }
 
 	// /* From i2c 0x0 address read 256 bytes data to buffer */
 	// if ((i2c_read(&device, 0x0, buffer, size)) != size)

@@ -1,0 +1,30 @@
+#define FORWARD 0x00
+#define BACKWARD 0x01
+
+#define FULL_THROTTLE 0xFF
+#define HALF_THROTTLE 0x80
+#define LOW_THROTTLE 0x64
+#define HIGH_THROTTLE 0xC0
+
+#define ENABLE_BOARD 0x00
+#define DISABLE_BOARD 0x01
+
+#define SET_POWER_ALL 0x02
+#define SET_POWER_M1 0x03
+#define SET_POWER_M2 0x04
+
+#define STOP_ALL 0X05
+#define STOP_M1 0x06
+#define STOP_M2 0x07
+
+#define BRAKE_ALL 0x08
+#define BRAKE_M1 0x09
+#define BRAKE_M2 0x0A
+
+#define GET_POWER_ALL 0x0B
+#define GET_POWER_M1 0x0C
+#define GET_POWER_M2 0x0D
+
+#define REVERSE_POWER_ALL 0x0E
+#define REVERSE_POWER_M1 0x0F
+#define REVERSE_POWER_M2 0x11
