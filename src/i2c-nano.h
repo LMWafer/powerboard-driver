@@ -3,28 +3,31 @@
 class Board
 {
     private:
-        I2CDevice device;
+        I2CDevice *device;
         unsigned char buffer[3];
         ssize_t size;
+        int sendBuffer();
+        short int correctValue(short int value);
     
     public:
-        Board::Board(unsigned int address, const char *bus_name="/dev/i2c-1");
+        Board(unsigned int address, const char *bus_name);
+
+        int enableBoard();
+        int disableBoard();
+
+        int setPowerAll(short int power);
+        int setPowerM1(short int power);
+        int setPowerM2(short int power);
+
+        int stopAll();
+        int stopM1();
+        int stopM2();
+
+        int brakeAll();
+        int brakeM1();
+        int brakeM2();
+
+        int reversePowerAll();
+        int reversePowerM1();
+        int reversePowerM2();
 };
-int enableBoard();
-int disableBoard();
-
-int setPowerAll();
-int setPowerM1();
-int setPowerM2();
-
-int stopAll();
-int stopM1();
-int stopM2();
-
-int brakeAll();
-int brakeM1();
-int brakeM2();
-
-int reversePowerAll();
-int reversePowerM1();
-int reversePowerM2();
