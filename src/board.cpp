@@ -1,6 +1,6 @@
 #include "i2c/i2c.h"
 #include "commands.h"
-#include "i2c-nano.h"
+#include "board.h"
 
 #include <iostream>
 #include <string.h>
@@ -146,22 +146,5 @@ int Board::reversePowerM1() {
 int Board::reversePowerM2() {
 	buffer_1[0] = REVERSE_POWER_M2;
 	sendBuffer(buffer_1, size_1);
-	return 0;
-}
-
-
-int main()
-{
-	cout << "Hello world !" << endl;
-	Board board(0x70);
-	board.stopAll();
-	useconds_t micro = 1000000;
-	board.setPowerM1(128);
-	usleep(3*micro);
-	board.brakeM2();
-	usleep(3*micro);
-	board.reversePowerM1();
-	usleep(3*micro);
-	board.reversePowerAll();
 	return 0;
 }
