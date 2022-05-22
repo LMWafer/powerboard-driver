@@ -19,3 +19,4 @@ add_library(jetson-i2c-powerboard SHARED ${LIBRARY_SOURCES})
 target_link_libraries(jetson-i2c-powerboard libi2c.so)
 
 # target_include_directories()
+install()
