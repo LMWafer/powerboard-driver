@@ -3,10 +3,12 @@
 class Board
 {
     private:
-        I2CDevice *device;
-        unsigned char buffer[3];
-        ssize_t size;
-        int sendBuffer();
+        I2CDevice device;
+        unsigned char buffer_3[3];
+        unsigned char buffer_1[1];
+        ssize_t size_3;
+        ssize_t size_1;
+        int sendBuffer(unsigned char buffer[], ssize_t size);
         short int correctValue(short int value);
     
     public:
