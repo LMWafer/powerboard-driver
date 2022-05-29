@@ -45,14 +45,14 @@ Board::Board(const unsigned int address, const string &bus_name = "/dev/i2c-1")
 	device.flags = 0;
 }
 
-int Board::enableBoard() {
-	buffer_1[0] = ENABLE_BOARD;
+int Board::enable() {
+	buffer_1[0] = ENABLE;
 	sendBuffer(buffer_1, size_1);
 	return 0;
 }
 
-int Board::disableBoard() {
-	buffer_1[0] = DISABLE_BOARD;
+int Board::disable() {
+	buffer_1[0] = DISABLE;
 	sendBuffer(buffer_1, size_1);
 	return 0;
 }

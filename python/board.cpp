@@ -9,8 +9,8 @@ PYBIND11_MODULE(pypowerboard, module_handle) {
     
     board.def(py::init<const int, const string &>());
 
-    board.def("enable_board", &Board::enableBoard);
-    board.def("disable_board", &Board::disableBoard);
+    board.def("enable", &Board::enable);
+    board.def("disable", &Board::disable);
 
     board.def("set_power_all", &Board::setPowerAll);
     board.def("set_power_m1", &Board::setPowerM1);
@@ -24,7 +24,7 @@ PYBIND11_MODULE(pypowerboard, module_handle) {
     board.def("brake_m1", &Board::brakeM1);
     board.def("brake_m2", &Board::brakeM2);
 
-    board.def("reversePowerAll", &Board::reversePowerAll);
+    board.def("reverse_power_all", &Board::reversePowerAll);
     board.def("reverse_power_m1", &Board::reversePowerM1);
     board.def("reverse_power_m2", &Board::reversePowerM2);
 }

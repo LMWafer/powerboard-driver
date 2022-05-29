@@ -17,8 +17,8 @@ class Board
     public:
         Board(const unsigned int address, const string &bus_name);
 
-        int enableBoard();
-        int disableBoard();
+        int enable();
+        int disable();
 
         int setPowerAll(short int power);
         int setPowerM1(short int power);

@@ -6,8 +6,8 @@
 #define LOW_THROTTLE 0x64
 #define HIGH_THROTTLE 0xC0
 
-#define ENABLE_BOARD 0x00
-#define DISABLE_BOARD 0x01
+#define ENABLE 0x00
+#define DISABLE 0x01
 
 #define SET_POWER_ALL 0x02
 #define SET_POWER_M1 0x03
