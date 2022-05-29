@@ -1,4 +1,7 @@
 #include "i2c/i2c.h"
+#include <iostream>
+
+using namespace std;
 
 class Board
 {
@@ -12,7 +15,7 @@ class Board
         short int correctValue(short int value);
     
     public:
-        Board(unsigned int address, const char *bus_name);
+        Board(const unsigned int address, const string &bus_name);
 
         int enableBoard();
         int disableBoard();

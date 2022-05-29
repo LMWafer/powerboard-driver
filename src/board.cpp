@@ -26,10 +26,11 @@ short int Board::correctValue(short int value) {
 	}
 }
 
-Board::Board(unsigned int address, const char *bus_name = "/dev/i2c-1")
+Board::Board(const unsigned int address, const string &bus_name = "/dev/i2c-1")
 {
 	int bus_fd;
-	if ((bus_fd = i2c_open(bus_name)) == -1)
+	const char *bus_name_char = bus_name.c_str();
+	if ((bus_fd = i2c_open(bus_name_char)) == -1)
 		cout << "An error occured during bus opening..." << endl;
 
 	size_3 = 3 * sizeof(unsigned char);
