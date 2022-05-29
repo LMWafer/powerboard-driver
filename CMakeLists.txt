@@ -14,8 +14,8 @@ link_directories(thirdparty/libi2c/)
 #-[] Set project specific files paths
 #-> Where to look for ".h" files with "#include"
 SET(INCLUDE_PATHS 
-    include/
-    thirdparty/libi2c/include/
+include/
+thirdparty/libi2c/include
 )
 #-> Where to pick library source files
 SET(LIBRARY_SOURCE_FILES
@@ -33,7 +33,7 @@ set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/lib)
 #-> Create a shared library (a .so file) with given source files
 add_library(jetson-i2c-powerboard SHARED ${LIBRARY_SOURCE_FILES})
 #-> Give library paths for external libraries' header files
-target_include_directories(jetson-i2c-powerboard ${INCLUDE_PATHS})
+target_include_directories(jetson-i2c-powerboard PUBLIC ${INCLUDE_PATHS})
 #-> Indicate which files are library's headers
 set_target_properties(jetson-i2c-powerboard PROPERTIES PUBLIC_HEADER "${LIBRARY_HEADERS_FILES}")
 #-> Link external libraries used by this library
