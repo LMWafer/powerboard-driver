@@ -5,13 +5,14 @@ DEV_CONT_NAME=jetson-i2c-powerboard-dev-container
 all: build-lib
 
 build-lib:
+	rm -rf build/
+	rm -rf lib/
 	mkdir build/
 	cd build/ && \
 	cmake .. && \
 	make --no-print-directory -j4 && \
 	sudo make install
-	sudo python3 setup.py install || \
-	rm -rf build/
+	sudo python3 setup.py install
 
 bake-dev:
 	docker build -t ${IMAGE_NAME}:${DEV_IMAGE_TAG} -f docker/dev_container/Dockerfile .
