@@ -14,8 +14,8 @@ link_directories(thirdparty/libi2c/)
 #-[] Set project specific files paths
 #-> Where to look for ".h" files with "#include"
 SET(INCLUDE_PATHS 
-include/
-thirdparty/libi2c/include
+    include/
+    thirdparty/libi2c/include
 )
 #-> Where to pick library source files
 SET(LIBRARY_SOURCE_FILES

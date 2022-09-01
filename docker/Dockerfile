@@ -1,10 +1,12 @@
 FROM ubuntu:20.04
 
+ENV DEBIAN_FRONTEND=noninteractive
+
 RUN apt-get update && \
     apt-get upgrade -y && \
     apt-get install -y -qq --no-install-recommends \
         build-essential \
-        make \
-        nano
+        cmake \
+        git
     
-WORKDIR /dpds/jetson_i2c_powerboard/
+WORKDIR /app/

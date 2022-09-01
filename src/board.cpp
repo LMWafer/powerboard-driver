@@ -37,9 +37,9 @@ Board::Board(const uint8_t address, const string &bus_name = "/dev/i2c-1")
 	if ((bus_fd = i2c_open(bus_name_char)) == -1)
 		cout << "An error occured during bus opening..." << endl;
 
-	size_4 = 4 * sizeof(unsigned char);
-	size_3 = 3 * sizeof(unsigned char);
-	size_2 = 2 * sizeof(unsigned char);
+	// size_4 = 4 * sizeof(unsigned char);
+	// size_3 = 3 * sizeof(unsigned char);
+	// size_2 = 2 * sizeof(unsigned char);
 
 	memset(&device, 0, sizeof(device));
 	device.bus = bus_fd;
@@ -55,9 +55,9 @@ Board::Board(const uint8_t address, const string &bus_name = "/dev/i2c-1")
 
 bool Board::arm()
 {
-	buffer_2[0] = COMMAND;
-	buffer_2[1] = ARM;
-	sendBuffer(buffer_2, size_2);
+	// buffer_2[0] = COMMAND;
+	// buffer_2[1] = ARM;
+	sendBuffer(unsigned char[] {COMMAND, ARM}, 2 * sizeof(unsigned char));
 	return 0;
 }
 

@@ -1,0 +1,7 @@
+[submodule "pybind11"]
+	path = thirdparty/pybind11
+	url = https://github.com/pybind/pybind11.git
+
+[submodule "libi2c"]
+	path = thirdparty/libi2c
+	url = https://github.com/amaork/libi2c.git

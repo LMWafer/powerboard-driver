@@ -1,9 +1,0 @@
-services:
-  dev-container:
-    container_name: jetson-i2c-powerboard-dev-container
-    image: lmwafer/jetson-i2c-powerboard:dev-0.2-ubuntu20.04
-    volumes:
-      - /dev:/dev
-      - ../../:/dpds/jetson-i2c-powerboard:rw
-    stdin_open: true
-    tty: true
