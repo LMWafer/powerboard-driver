@@ -6,6 +6,7 @@ build-lib:
 	rm -rf build/
 	rm -rf lib/
 	mkdir build/
+	make -C thirdparty/libi2c/
 	cd build/ && \
 	cmake .. && \
 	make --no-print-directory -j4
