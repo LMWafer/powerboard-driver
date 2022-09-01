@@ -30,12 +30,6 @@ int main(){
     board.stopAll();
     cout << "Disarming board" << endl;
     board.disarm();
-    usleep(threeMic);
-    cout << "Activating relay" << endl;
-    board.buck.enableInput();
-    usleep(threeMic);
-    cout << "Deactivating relay" << endl;
-    board.disarm();
     
     return 0;
 }

@@ -1,7 +1,7 @@
 services:
   dev-container:
     container_name: powerboard-driver-dev-container
-    image: lmwafer/powerboard-driver-dev:1.0.0-1
+    image: lmwafer/powerboard-driver-dev:1.0.0-3
     volumes:
       - /dev:/dev
       - ../:/app/

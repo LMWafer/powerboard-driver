@@ -4,7 +4,7 @@
 namespace py = pybind11;
 
 PYBIND11_MODULE(pypowerboard, module_handle) {
-    module_handle.doc() = "A python binding for jetson-i2c-powerboard driver.";
+    module_handle.doc() = "A python binding for powerboard driver.";
 
     py::class_<Board> board(module_handle, "Board");
     board.def(py::init<const uint8_t, const string &>());
@@ -27,30 +27,4 @@ PYBIND11_MODULE(pypowerboard, module_handle) {
     board.def("reverse_speed_all", &Board::reverseAll, "Reverse speed setpoint of both motors.");
     board.def("reverse_speed_m1", &Board::reverseM1, "Reverse speed setpoint of motor 1.");
     board.def("reverse_speed_m2", &Board::reverseM2, "Reverse speed setpoint of motor 2.");
-
-    py::class_<Board::Buck> buck(board, "buck");
-    buck.def(py::init<>());
-    // buck.def("enable_regulator", [](Board::Buck &self) { self.enableRegulator(); });
-    buck.def("enable_regulator", &Board::Buck::enableRegulator);
-
-    // buck.def("disable_regulator", &Board::Buck::disableRegulator);
-
-    // buck.def("enable_input", &Board::Buck::enableInput);
-    // buck.def("disable_input", &Board::Buck::disableInput);
-
-    // buck.def("enable_output", &Board::Buck::enableOutput);
-    // buck.def("disable_output", &Board::Buck::disableOutput);
-
-    // py::class_<Board::Bridge> bridge(board, "bridge");
-    // bridge.def(py::init<>());
-
-    // bridge.def("enable_ma", &Board::Bridge::enableMA);
-    // bridge.def("disable_ma", &Board::Bridge::disableMA);
-    // bridge.def("enable_mb", &Board::Bridge::enableMB);
-    // bridge.def("disable_mb", &Board::Bridge::disableMB);
-
-    // bridge.def("set_signal_in1", &Board::Bridge::setSignalIN1);
-    // bridge.def("set_signal_in2", &Board::Bridge::setSignalIN2);
-    // bridge.def("set_signal_in3", &Board::Bridge::setSignalIN3);
-    // bridge.def("set_signal_in4", &Board::Bridge::setSignalIN4);
 }

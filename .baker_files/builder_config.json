@@ -1,7 +1,7 @@
 {
     "dev": {
         "image_name": "lmwafer/powerboard-driver-dev",
-        "image_version": "1.0.0-1",
+        "image_version": "1.0.0-3",
         "dockerfile": "docker/Dockerfile",
         "build_context_path": ".baker_files/build_context/",
         "build_context_content": []

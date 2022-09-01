@@ -7,6 +7,10 @@ RUN apt-get update && \
     apt-get install -y -qq --no-install-recommends \
         build-essential \
         cmake \
-        git
+        python \
+        python-dev \
+        python3 \
+        python3-dev \
+        python3-pip
     
 WORKDIR /app/
