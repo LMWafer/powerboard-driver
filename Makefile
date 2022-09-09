@@ -1,8 +1,7 @@
 CONT_NAME=powerboard-driver-dev-container
 
-all: build-lib
-
-build-lib:
+# Minimal Mode
+minimal:
 	rm -rf build/
 	rm -rf lib/
 	mkdir build/
@@ -14,17 +13,37 @@ build-lib:
 install:
 	cd build/ && \
 	make install
-	python3 setup.py install 
+	
 
-bake-dev:
+# Bindings Mode
+
+python:
+	rm -rf build/
+	rm -rf lib/
+	mkdir build/
+	make -C thirdparty/libi2c/
+	cd build/ && \
+	cmake -DBUILD_PYTHON=ON .. && \
+	make --no-print-directory -j4
+
+install-python:
+	cd build/ && \
+	make install
+	python3 setup.py install
+
+# Examples
+
+# Docker
+
+bake:
 	python3 baker.py build
 
-up-dev:
+up:
 	docker-compose -f docker/docker-compose.yml up -d
 	clear && docker exec -it ${CONT_NAME} bash
 
-down-dev:
+down:
 	docker-compose -f docker/docker-compose.yml down
 
-enter-dev:
+enter:
 	docker exec -it ${CONT_NAME} bash
