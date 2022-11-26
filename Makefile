@@ -1,7 +1,8 @@
 CONT_NAME=powerboard-driver-dev-container
 
 # Minimal Mode
-minimal:
+.PHONY: build-minimal
+build-minimal:
 	rm -rf build/
 	rm -rf lib/
 	mkdir build/
@@ -10,14 +11,16 @@ minimal:
 	cmake .. && \
 	make --no-print-directory -j4
 
-install:
+.PHONY: install-minimal
+install-minimal:
 	cd build/ && \
 	make install
 	
 
 # Bindings Mode
 
-python:
+.PHONY: build-python
+build-python:
 	rm -rf build/
 	rm -rf lib/
 	mkdir build/
@@ -26,6 +29,7 @@ python:
 	cmake -DBUILD_PYTHON=ON .. && \
 	make --no-print-directory -j4
 
+.PHONY: install-python
 install-python:
 	cd build/ && \
 	make install
