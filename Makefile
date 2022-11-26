@@ -1,6 +1,6 @@
 CONT_NAME=powerboard-driver-dev-container
 
-# Minimal Mode
+# Minimal Mode (C++, No Binding, No Example)
 .PHONY: build-minimal
 build-minimal:
 	rm -rf build/
@@ -8,7 +8,7 @@ build-minimal:
 	mkdir build/
 	make -C thirdparty/libi2c/
 	cd build/ && \
-	cmake .. && \
+	cmake -DBUILD_PYTHON=OFF -DBUILD_EXAMPLES=OFF .. && \
 	make --no-print-directory -j4
 
 .PHONY: install-minimal
@@ -17,25 +17,22 @@ install-minimal:
 	make install
 	
 
-# Bindings Mode
-
-.PHONY: build-python
-build-python:
+# Full Mode (C++, Binding, Example)
+.PHONY: build-full
+build-full:
 	rm -rf build/
 	rm -rf lib/
 	mkdir build/
 	make -C thirdparty/libi2c/
 	cd build/ && \
-	cmake -DBUILD_PYTHON=ON .. && \
+	cmake .. && \
 	make --no-print-directory -j4
 
-.PHONY: install-python
-install-python:
+.PHONY: install-full
+install-full:
 	cd build/ && \
 	make install
 	python3 setup.py install
-
-# Examples
 
 # Docker
 
