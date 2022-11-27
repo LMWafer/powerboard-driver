@@ -11,7 +11,7 @@ build-minimal:
 	cmake -DBUILD_PYTHON=OFF -DBUILD_EXAMPLES=OFF .. && \
 	make --no-print-directory -j4
 
-.PHONY: install-minimal
+.PHONY: install
 install-minimal:
 	cd build/ && \
 	make install
@@ -36,15 +36,19 @@ install-full:
 
 # Docker
 
-bake:
-	python3 baker.py build
+.PHONY: docker-build
+docker-build:
+	docker build -f docker/Dockerfile -t lmwafer/powerboard-driver-dev:1.0.0-3 docker/context
 
+.PHONY: up
 up:
 	docker-compose -f docker/docker-compose.yml up -d
 	clear && docker exec -it ${CONT_NAME} bash
 
+.PHONY: down
 down:
 	docker-compose -f docker/docker-compose.yml down
 
+.PHONY: enter
 enter:
 	docker exec -it ${CONT_NAME} bash
