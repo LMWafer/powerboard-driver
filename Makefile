@@ -16,6 +16,10 @@ install-minimal:
 	cd build/ && \
 	make install
 	
+.PHONY: deps-minimal
+deps-minimal:
+	export DEBIAN_FRONTEND=noninteractive && \
+	sudo apt-get install -y g++ make cmake python python-dev
 
 # Full Mode (C++, Binding, Example)
 .PHONY: build-full
@@ -33,6 +37,11 @@ install-full:
 	cd build/ && \
 	make install
 	python3 setup.py install
+
+.PHONY: deps-full
+deps-full:
+	export DEBIAN_FRONTEND=noninteractive && \
+	sudo apt-get install -y g++ make cmake python python-dev python3 python3-dev python3-pip
 
 # Docker
 

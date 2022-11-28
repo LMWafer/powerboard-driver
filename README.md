@@ -27,7 +27,7 @@ cd powerboard-driver/
 make 
 make install
 ```
-This is equivalent to [**Minimal Installation**](#minimal-installation). See [**installation instructions**](#installation-instructions) for details.
+This is equivalent to [**Minimal Installation**](#-minimal-mode-(c++)). See [**installation instructions**](#build-from-source) for details.
 
 # Build from source
 
