@@ -29,10 +29,10 @@ class CopyLibFile(install):
 setup(
     name = "pypowerboard",
     version = __version__,
-    description = "A python binding for jetson-i2c-powerboard driver.",
+    description = "A python binding for powerboard I2C driver.",
     author = __author__,
-    keywords = "binding jetson powerboard",
-    url = "https://github.com/LMWafer/AERIS-powerboard-driver",
+    keywords = "binding i2c powerboard driver motor controler",
+    url = "https://github.com/LMWafer/powerboard-driver",
     long_description = open('README.md').read(),
     author_email = "louismarie.restout@gmail.com",
     cmdclass=dict(

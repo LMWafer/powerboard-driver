@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.10.2)
-project(jetson-i2c-powerboard)
+project(powerboard-driver)
 
 #- Use the module that provides GNU standard installation directories
 include(GNUInstallDirs)
@@ -31,20 +31,20 @@ set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/lib)
 
 #-[] Build project's library
 #-> Create a shared library (a .so file) with given source files
-add_library(jetson-i2c-powerboard SHARED ${LIBRARY_SOURCE_FILES})
+add_library(powerboard-driver SHARED ${LIBRARY_SOURCE_FILES})
 #-> Give library paths for external libraries' header files
-target_include_directories(jetson-i2c-powerboard PUBLIC ${INCLUDE_PATHS})
+target_include_directories(powerboard-driver PUBLIC ${INCLUDE_PATHS})
 #-> Indicate which files are library's headers
-set_target_properties(jetson-i2c-powerboard PROPERTIES PUBLIC_HEADER "${LIBRARY_HEADERS_FILES}")
+set_target_properties(powerboard-driver PROPERTIES PUBLIC_HEADER "${LIBRARY_HEADERS_FILES}")
 #-> Link external libraries used by this library
-target_link_libraries(jetson-i2c-powerboard libi2c.so)
+target_link_libraries(powerboard-driver libi2c.so)
 
 #-[] Generate project installation rules
-install(TARGETS jetson-i2c-powerboard 
+install(TARGETS powerboard-driver 
         LIBRARY
-            DESTINATION ${CMAKE_INSTALL_LIBDIR}/jetson-i2c-powerboard
+            DESTINATION ${CMAKE_INSTALL_LIBDIR}/powerboard-driver
         PUBLIC_HEADER 
-            DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/jetson-i2c-powerboard)
+            DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/powerboard-driver)
 
 #-[] Library's python bindings
 if (BUILD_PYTHON)
