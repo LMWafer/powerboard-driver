@@ -5,5 +5,5 @@ target_include_directories(pypowerboard INTERFACE
 )
 
 target_link_libraries(pypowerboard PRIVATE 
-    jetson-i2c-powerboard
+    powerboard-driver
 )
