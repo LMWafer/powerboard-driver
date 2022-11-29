@@ -7,7 +7,7 @@ PYBIND11_MODULE(pypowerboard, module_handle) {
     module_handle.doc() = "A python binding for powerboard driver.";
 
     py::class_<Board> board(module_handle, "Board");
-    board.def(py::init<const uint8_t, const string &>());
+    board.def(py::init<const uint8_t, const string &>(), py::arg("address")=112, py::arg("bus_name")="/dev/i2c-1");
 
     board.def("arm", &Board::arm, "Enable board components. \nWARNING ! A conductive path is created from battery to motors, making the board dangerous to touch. \nThis function allows power to be converted, PWM to be amplified, signals to pass from/to interface connectors etc.");
     board.def("disarm", &Board::disarm, "Disable board components. \nEverything is shut down except microcontroller.");
