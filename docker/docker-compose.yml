@@ -4,6 +4,6 @@ services:
     image: lmwafer/powerboard-driver-dev:1.0.0-3
     volumes:
       - /dev:/dev
-      - ../:/app/
+      - ../:/ws/
     stdin_open: true
     tty: true

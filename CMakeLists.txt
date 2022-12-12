@@ -6,7 +6,8 @@ include(GNUInstallDirs)
 
 #-[] Set project specific options
 #-> Library build options
-option(BUILD_PYTHON "Build python3 bindings of the driver." ON)
+option(BUILD_PYTHON "Build Python 3 bindings of the driver." ON)
+option(BUILD_ROS "Build ROS 1 wrapper alongside the library." OFF)
 option(BUILD_EXAMPLES "Build examples alongside the library." ON)
 #-> Tell the linker where to look for an external library
 link_directories(thirdparty/libi2c/)
@@ -48,10 +49,14 @@ install(TARGETS powerboard-driver
 
 #-[] Library's python bindings
 if (BUILD_PYTHON)
-    message(STATUS "Building python3 bindings...")
+    message(STATUS "Building Python 3 bindings...")
     add_subdirectory(thirdparty/pybind11)
     add_subdirectory(python)
 endif(BUILD_PYTHON)
+
+if (BUILD_ROS)
+    message(STATUS "Building ROS 1 wrapper...")
+endif(BUILD_ROS)
 
 #-[] Library's CXX examples
 if (BUILD_EXAMPLES)

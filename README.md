@@ -1,4 +1,4 @@
-[**Introduction**](#introduction) | [**I want my driver now !**](#i-want-my-driver-now) | [**Detailed info**](#detailed-infos) | [**Prerequisites**](#image-prerequisites) | [**Installation**](#image-installation) | [**How-tos**](#image-usage)
+[**Introduction**](#introduction) | [**I want my driver now !**](#i-want-my-driver-now) | [**Classic Installation**](#build-from-source) | [**ROS Installation**](#ros-package-build) | [**Docker containers**](#docker-containers)
 
 # Introduction 
 
@@ -6,16 +6,14 @@
 
 `powerboard-driver` allows you to pilot powerboards over I2C, from a Single Board Computer (SBC) such as `Jetson Nano` or `Raspberry PI 3`. Ask a motor to turn in a direction, and the powerboard network takes care of everything !
 
-> `powerboard-driver` does not run on a `powerboard`'s MCU, but rather on a SBC. It's task is to interface thesaid SBC with multiple `powerboard-firmware` (i.e. multiple `powerboards`) on the same I2C wire.
+> `powerboard-driver` does not run on a `powerboard`'s MCU, but rather on a computer acting as master for boards. The driver's task is to interface thesaid computer with multiple `powerboard-firmware` (i.e. multiple `powerboards`) on the same I2C wire.
 
 This repository hosts code for:
 - C++ backbone;
 - Python interface;
-- Development Docker container;
+- ROS Wrapper;
+- Docker container for development;
 - Documentation.
-
-- Why this repo
-
 
 
 # I want my driver now !
@@ -27,40 +25,76 @@ cd powerboard-driver/
 make 
 make install
 ```
-This is equivalent to [**Minimal Installation**](#-minimal-mode-(c++)). See [**installation instructions**](#build-from-source) for details.
+This is equivalent to [**Minimal Installation**](#build-from-source): no Python binding, no example, no ROS wrapper.
 
 # Build from source
 
 ## Clone with submodules
 ```bash
 git clone --recurse-submodules https://github.com/LMWafer/powerboard-driver.git
+cd powerboard-driver/
 ```
 
 ## Minimal mode (C++)
 
 ```bash
-# Prerequisites
-export DEBIAN_FRONTEND=noninteractive && sudo apt-get install -y g++ make cmake python python-dev
-# Build
+#-> Prerequisites
+make deps-minimal
+#-> Build
 make
-# Install
+#-> Install
 sudo make install
 ```
 
 ## Full mode (C++ & Python & Examples)
 
 ```bash
-# Prerequisites
-export DEBIAN_FRONTEND=noninteractive && sudo apt-get install -y g++ make cmake python python-dev python3 python3-dev python3-pip
-# Build
+#-> Prerequisites
+make deps-full
+#-> Build 
 make build-full
-# Install
+#-> Install
 sudo make install-full
 ```
 
-# Containerized development
+# ROS package build 
 
-## Perequisites
+The following instructions totally replace the above ones. 
+
+> ROS package build has a dedicated process and location, do not perform it on a repo pre-cloned into a random directory.
+
+```bash
+#-> Install dependencies
+sudo apt-get install -y python3-catkin-tools
+
+#-> Setup  your catkin workspace
+mkdir catkin_ws/ && cd catkin_ws/
+catkin config --init --mkdirs --extend /opt/ros/<ROS_DISTRO>
+
+#-> Clone with submodules
+cd src/
+git clone --recurse-submodules https://github.com/LMWafer/powerboard-driver.git
+
+#-> Build the driver in full mode
+make deps-full
+make build-full
+sudo make install-full
+cd ../../
+
+#-> Add other packages
+# ...
+
+#-> Build catkin workspace
+#-? catkin will recursively look for ROS package into the repo directory, no need to specify path
+catkin build
+source devel/setup.bash
+```
+
+# Docker Containers 
+
+## Containerized Development
+
+### Perequisites
 
 - Ubuntu 20.04
   
@@ -73,47 +107,48 @@ sudo make install-full
   ```
   before restarting the installation process
 
-## Get image on your machine
+### Get image on your machine
 
-### Download from Dockerhub
+Download from Dockerhub
 
 ```bash
 docker pull lmwafer/powerboard-driver-dev
 ```
 
-### Build from source
+Build from source
 
 ```bash
 make docker-build
 ```
 
-## Start a container & open a shell inside
+### Start a container & open a shell inside
 
-### Provided shortcut
+Provided shortcut
 
 ```bash
 make up 
 make enter
 ```
 
-### With `Docker`
+With `Docker`
 
 ```bash
 docker run -it lmwafer/powerboard-driver-dev \
   --volume /dev:/dev \
-  --volume ../:/app/ \
-  --name powerboard-driver-dev-container
+  --volume ../:/ws/ \
+  --name powerboard-driver-dev-container && \
+docker exec -it powerboard-driver-dev-container bash
 ```
 
-## Stop a running container and remove it
+### Stop a running container and remove it
 
-### Provided shortcut
+Provided shortcut
 
 ```bash
 make down
 ```
 
-### With `Docker`
+With `Docker`
 
 ```bash
 docker stop powerboard-driver-dev-container
