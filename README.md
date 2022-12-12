@@ -76,6 +76,7 @@ cd src/
 git clone --recurse-submodules https://github.com/LMWafer/powerboard-driver.git
 
 #-> Build the driver in full mode
+#-? Run once, library will persist accross catkin builds
 make deps-full
 make build-full
 sudo make install-full
@@ -89,6 +90,8 @@ cd ../../
 catkin build
 source devel/setup.bash
 ```
+
+You only need to build the driver once: after that, if needed re-run process from `Build catkin workspace`.
 
 # Docker Containers 
 
