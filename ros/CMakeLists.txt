@@ -172,7 +172,9 @@ include_directories(
 ## in contrast to setup.py, you can choose the destination
 catkin_install_python(
   PROGRAMS
-    # scripts/my_python_script
+    scripts/example-client.py
+    scripts/powerboard.py
+    scripts/teleop-client.py
   DESTINATION 
     ${CATKIN_PACKAGE_BIN_DESTINATION}
 )
