@@ -18,6 +18,7 @@ This repository hosts code for:
 
 # I want my driver now !
 Run these commands
+
 ```bash
 git clone --recurse-submodules https://github.com/LMWafer/powerboard-driver.git
 cd powerboard-driver/
@@ -25,7 +26,7 @@ make deps-minimal
 make
 sudo make install
 ```
-```
+
 This is equivalent to [**Minimal Installation**](#build-from-source): no Python binding, no example, no ROS wrapper.
 
 # Build from source
